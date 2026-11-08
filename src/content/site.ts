@@ -1,7 +1,15 @@
 // All page content lives here. An empty `href` means the link is not ready yet:
 // the page then shows the item as "coming soon" instead of a dead link.
 
-export type Item = { title: string; note?: string; href?: string };
+export type Item = {
+  title: string;
+  note?: string;
+  href?: string;
+  // Character sticker (transparent webp with white outline in /public/creations),
+  // rendered from the game itself and shown standing on the item box's right edge.
+  // `place` holds Tailwind position/size classes for that sticker.
+  character?: { src: string; alt: string; width: number; height: number; place: string };
+};
 
 export type Creation = {
   id: "web-apps" | "videos" | "games" | "ebooks";
@@ -51,10 +59,24 @@ export const site = {
           title: "Permainan Tradisional Malaysia",
           note: "Traditional kampung games (still in development)",
           href: "https://permainan-tradisional-seven.vercel.app/",
+          character: {
+            src: "/creations/permainan-tradisional-kid.webp",
+            alt: "The kampung kid player character from Permainan Tradisional Malaysia",
+            width: 210,
+            height: 476,
+            place: "-top-28 -right-9 h-[165px]",
+          },
         },
         {
           title: "Gi Mano?",
           note: "Ride a kapcai around Kelantan (still in development)",
+          character: {
+            src: "/creations/gi-mano-abe.webp",
+            alt: "Abe, the player character from Gi Mano?",
+            width: 159,
+            height: 475,
+            place: "-bottom-9 -right-8 h-[165px]",
+          },
           href: "https://gi-mano-webb-web.vercel.app/",
         },
       ],

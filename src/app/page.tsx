@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Nav } from "@/components/Nav";
 import { Hero } from "@/components/Hero";
 import { TelegramButton } from "@/components/TelegramButton";
@@ -24,7 +25,20 @@ function CreationCard({ c }: { c: Creation }) {
       ) : (
         <ul className="mt-auto space-y-2 pt-5">
           {c.items.map((it) => (
-            <li key={it.title} className="rounded-[10px] border-[2.5px] border-ink bg-paper px-3 py-2">
+            <li
+              key={it.title}
+              className={`relative rounded-[10px] border-[2.5px] border-ink bg-paper px-3 py-2 ${it.character ? "pr-20" : ""}`}
+            >
+              {it.character && (
+                <Image
+                  src={it.character.src}
+                  alt={it.character.alt}
+                  width={it.character.width}
+                  height={it.character.height}
+                  unoptimized // small webp; keeps the transparent white-outlined edge as-is
+                  className={`pointer-events-none absolute z-10 w-auto drop-shadow-[2px_4px_3px_rgba(0,0,0,0.3)] ${it.character.place}`}
+                />
+              )}
               {it.href ? (
                 <a href={it.href} target="_blank" rel="noopener noreferrer" className="block font-bold underline decoration-2 underline-offset-4 hover:decoration-brand">
                   {it.title}
