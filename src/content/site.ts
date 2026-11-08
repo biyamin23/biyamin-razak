@@ -34,7 +34,23 @@ export const site = {
       id: "web-apps",
       title: "AI Web Apps",
       blurb: "Smart solutions for real-world needs.",
-      items: [], // TODO(user): app names + URLs
+      items: [
+        {
+          title: "SpeakEase",
+          note: "Gamified SPM 1119 English speaking test training, with AI speech feedback",
+          href: "https://speakeaseapp.vercel.app/",
+        },
+        {
+          title: "walimatul.my",
+          note: "Digital wedding invitation cards with RSVP, maps and DuitNow QR",
+          href: "https://www.walimatul.my/",
+        },
+        {
+          title: "Portal Minggu Aktiviti",
+          note: "MRSM Tumpat 2026 activity week: schedule, results and merit ranking",
+          href: "https://mingguaktiviti-rouge.vercel.app/",
+        },
+      ],
     },
     {
       id: "videos",
