@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+@theme {
+  --color-paper: #fff8e8;
+  --color-ink: #000000;
+  --color-brand: #2f5bff;
+  --color-sun: #ffd43b;
+  --color-grape: #c3b5ff;
+  --color-mint: #8fe3a0;
+  --color-peach: #ffc27a;
+  --color-bubble: #ff9bd2;
+  --color-sky: #bfd6ff;
+
+  --font-sans: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+  --font-hand: var(--font-caveat), "Comic Sans MS", cursive;
+
+  --shadow-hard: 5px 5px 0 0 #000;
+  --shadow-hard-sm: 3px 3px 0 0 #000;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  overflow-x: clip;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-brand);
+  outline-offset: 3px;
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex min-h-12 items-center gap-2 rounded-full border-[3px] border-ink px-6 py-2.5 text-base font-bold shadow-hard transition-[transform,box-shadow] duration-150;
+  }
+  .btn:hover {
+    transform: translate(2px, 2px);
+    box-shadow: var(--shadow-hard-sm);
+  }
+  .btn:active {
+    transform: translate(5px, 5px);
+    box-shadow: none;
+  }
+  .sticker {
+    @apply inline-block rounded-[10px] border-[3px] border-ink px-4 py-1 font-hand leading-none shadow-hard-sm;
+  }
+  .display {
+    font-variation-settings: "opsz" 96;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn,
+  .btn:hover,
+  .btn:active {
+    transition: none;
+  }
+}
