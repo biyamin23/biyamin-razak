@@ -24,10 +24,10 @@ function CreationCard({ c }: { c: Creation }) {
         <p className="mt-auto pt-5 font-hand text-xl">Projects coming soon</p>
       ) : (
         <ul className="mt-auto space-y-2 pt-5">
-          {c.items.map((it) => (
+          {c.items.map((it, i) => (
             <li
               key={it.title}
-              className={`relative rounded-[10px] border-[2.5px] border-ink bg-paper px-3 py-2 ${it.character ? "pr-20" : ""}`}
+              className={`relative rounded-[10px] border-[2.5px] border-ink bg-paper px-3 py-2 ${it.character ? "game-item pr-20" : ""}`}
             >
               {it.character && (
                 <Image
@@ -36,7 +36,7 @@ function CreationCard({ c }: { c: Creation }) {
                   width={it.character.width}
                   height={it.character.height}
                   unoptimized // small webp; keeps the transparent white-outlined edge as-is
-                  className={`pointer-events-none absolute z-10 w-auto drop-shadow-[2px_4px_3px_rgba(0,0,0,0.3)] ${it.character.place}`}
+                  className={`game-sticker pointer-events-none absolute z-10 w-auto drop-shadow-[2px_4px_3px_rgba(0,0,0,0.3)] ${i > 0 ? "is-second" : ""} ${it.character.place}`}
                 />
               )}
               {it.href ? (

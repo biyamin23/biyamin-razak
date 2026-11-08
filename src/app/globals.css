@@ -59,7 +59,40 @@ body {
   }
 }
 
+/* Game character stickers: a slow idle sway, and a hop when their box is
+   hovered or tapped. Pivot at the feet so they rock like they're standing. */
+@keyframes sticker-sway {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg) translateY(-2px); }
+}
+@keyframes sticker-hop {
+  0% { transform: translateY(0) rotate(0); }
+  35% { transform: translateY(-22px) rotate(-6deg); }
+  60% { transform: translateY(0) rotate(4deg) scaleY(0.94); }
+  80% { transform: translateY(-5px) rotate(-1deg); }
+  100% { transform: translateY(0) rotate(0); }
+}
+.game-sticker {
+  transform-origin: 50% 100%;
+  animation: sticker-sway 3.4s ease-in-out infinite;
+}
+.game-sticker.is-second {
+  animation-duration: 4.1s;
+  animation-delay: -1.3s;
+}
+.game-item:hover .game-sticker,
+.game-item:focus-within .game-sticker,
+.game-item:active .game-sticker {
+  animation: sticker-hop 0.6s ease-out;
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .game-sticker,
+  .game-item:hover .game-sticker,
+  .game-item:focus-within .game-sticker,
+  .game-item:active .game-sticker {
+    animation: none;
+  }
   .btn,
   .btn:hover,
   .btn:active {
