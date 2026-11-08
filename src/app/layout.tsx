@@ -14,10 +14,23 @@ const caveat = Caveat_Brush({
   weight: "400",
 });
 
+const title = "Biyamin Razak | Teacher, AI creator, digital builder";
+const description =
+  "MRSM teacher for Computer Science and Teknologi & Digital. AI web apps, AI videos (Apa Jadi Kalau), AI games and eBooks.";
+
+// og:image comes from app/opengraph-image.tsx. On Vercel, Next.js builds the
+// absolute image URL from the production domain automatically.
 export const metadata: Metadata = {
-  title: "Biyamin Razak | Teacher, AI creator, digital builder",
-  description:
-    "MRSM teacher for Computer Science and Teknologi & Digital. AI web apps, AI videos (Apa Jadi Kalau), AI games and eBooks.",
+  title,
+  description,
+  openGraph: {
+    type: "website",
+    siteName: "Biyamin Razak",
+    locale: "en_MY",
+    title,
+    description,
+  },
+  twitter: { card: "summary_large_image", title, description },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

@@ -45,7 +45,19 @@ export const site = {
       id: "games",
       title: "AI Games",
       blurb: "Play, learn and relive the nostalgia.",
-      items: [], // TODO(user): game names + URLs
+      // Both games are still in development but open for anyone to try.
+      items: [
+        {
+          title: "Permainan Tradisional Malaysia",
+          note: "Traditional kampung games (still in development)",
+          href: "https://permainan-tradisional-seven.vercel.app/",
+        },
+        {
+          title: "Gi Mano?",
+          note: "Ride a kapcai around Kelantan (still in development)",
+          href: "https://gi-mano-webb-web.vercel.app/",
+        },
+      ],
     },
     {
       id: "ebooks",
