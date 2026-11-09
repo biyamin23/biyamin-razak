@@ -48,7 +48,7 @@ function CreationCard({ c }: { c: Creation }) {
               )}
               <span className="text-sm">
                 {it.note}
-                {!it.href && <span className="font-hand text-base"> (coming soon)</span>}
+                {!it.href && <span className="font-hand text-base"> {site.pendingLabel}</span>}
               </span>
             </li>
           ))}
@@ -69,10 +69,25 @@ export default function Home() {
           <section id="about" aria-labelledby="about-title" className="scroll-mt-6 lg:col-span-4">
             <span className="sticker -rotate-3 bg-sun text-3xl">About me</span>
             <h2 id="about-title" className="display mt-6 text-[clamp(2.2rem,5vw,3rem)] leading-[1.02] font-extrabold tracking-tight">
-              A teacher with a builder&apos;s mindset.
+              {site.aboutTitle}
             </h2>
-            <p className="mt-5 max-w-md text-lg leading-relaxed">{site.about}</p>
+            {site.about.map((p) => (
+              <p key={p.slice(0, 20)} className="mt-5 max-w-md text-lg leading-relaxed">
+                {p}
+              </p>
+            ))}
             <Mosque className="mt-10 w-full max-w-xs" />
+            <ul className="mt-8 space-y-4">
+              {site.highlights.map((h, i) => (
+                <li
+                  key={h.title}
+                  className={`max-w-sm rounded-[14px] border-[3px] border-ink px-4 py-3 shadow-hard-sm ${i % 2 ? "bg-grape rotate-1" : "bg-sky -rotate-1"}`}
+                >
+                  <p className="font-extrabold leading-tight">{h.title}</p>
+                  <p className="mt-0.5 text-sm leading-snug">{h.note}</p>
+                </li>
+              ))}
+            </ul>
           </section>
 
           <section id="creations" aria-labelledby="creations-title" className="scroll-mt-6 lg:col-span-8">
@@ -95,7 +110,7 @@ export default function Home() {
             <div>
               <span className="sticker rotate-2 bg-mint text-3xl">Services</span>
               <h2 id="services-title" className="mt-5 text-3xl leading-tight font-extrabold tracking-tight">
-                Things I can make for you
+                Things I can build for you
               </h2>
             </div>
             <ul className="grid gap-x-8 gap-y-6 sm:grid-cols-2">

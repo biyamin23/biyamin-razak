@@ -1,5 +1,5 @@
 // All page content lives here. An empty `href` means the link is not ready yet:
-// the page then shows the item as "coming soon" instead of a dead link.
+// the page then shows `pendingLabel` instead of a dead link.
 
 export type Item = {
   title: string;
@@ -22,9 +22,17 @@ export const site = {
   name: "Biyamin Razak",
   roles: "teacher, AI creator & digital builder",
   intro:
-    "I'm a MRSM teacher, teaching Computer Science and Teknologi & Digital, while exploring AI and turning ideas into real digital creations.",
-  about:
-    "I'm Biyamin, a MRSM teacher, passionate about Computer Science, Teknologi & Digital, and the limitless possibilities of AI.",
+    "I'm an MRSM Computer Science educator who turns complex tech into 3D explainer videos, nostalgic Malaysian games, and practical web apps.",
+  aboutTitle: "Classroom clarity meets a builder's mindset.",
+  about: [
+    "By day, I teach Computer Science and Teknologi & Digital at MRSM, helping students break down tough concepts into simple, logical steps.",
+    "After hours, I apply that same approach to building with AI, whether I'm scripting 3D \"what-if\" animations for TikTok, recreating 90s kampung nostalgia in browser games, or writing step-by-step Bahasa Melayu guides so anyone can start shipping their own ideas.",
+  ],
+  // Only facts the owner confirmed (Google Certified Educator Level 2: confirmed 2026-11-09).
+  highlights: [
+    { title: "Google Certified Educator (Level 2)", note: "Proven classroom & digital pedagogy." },
+    { title: "4 creative formats", note: "Web apps, 3D videos, indie games & BM eBooks." },
+  ],
 
   telegram: "https://t.me/biyaminrazak",
   tiktok: "https://www.tiktok.com/@biyaminrazak",
@@ -73,7 +81,7 @@ export const site = {
       items: [
         {
           title: "Permainan Tradisional Malaysia",
-          note: "Traditional kampung games (still in development)",
+          note: "3D 80s–90s kampung nostalgia game (in active development, playable now)",
           href: "https://permainan-tradisional-seven.vercel.app/",
           character: {
             src: "/creations/permainan-tradisional-kid.webp",
@@ -85,7 +93,7 @@ export const site = {
         },
         {
           title: "Gi Mano?",
-          note: "Ride a kapcai around Kelantan (still in development)",
+          note: "Ride a kapcai across Kelantan in 3D (in active development, playable now)",
           character: {
             src: "/creations/gi-mano-abe.webp",
             alt: "Abe, the player character from Gi Mano?",
@@ -110,11 +118,25 @@ export const site = {
     },
   ] satisfies Creation[],
 
-  // Taken from the reference's own "Let's work together" line.
+  // Shown next to items that have no link yet (the eBooks).
+  pendingLabel: "(Drafting now, DM for early access)",
+
   services: [
-    { title: "eBooks & digital products", note: "Step-by-step guides in Bahasa Melayu." },
-    { title: "AI videos", note: "Explainer videos made with AI tools." },
-    { title: "AI projects", note: "Ideas turned into working AI tools." },
-    { title: "Custom development", note: "Web apps built around your needs." },
+    {
+      title: "eBooks & digital guides",
+      note: "Practical, step-by-step Bahasa Melayu playbooks and templates for learning AI video, game, and web creation.",
+    },
+    {
+      title: "3D & AI explainer videos",
+      note: "Scroll-stopping vertical videos (like my \"Apa Jadi Kalau\" series) with custom 3D scenes, voiceovers, and clear storytelling.",
+    },
+    {
+      title: "AI tools & prototypes",
+      note: "Custom AI workflows, interactive quizzes, and automated classroom or business helpers tailored to your daily tasks.",
+    },
+    {
+      title: "Custom web development",
+      note: "Fast, responsive landing pages, event microsites, and school or organizational dashboards.",
+    },
   ],
 };

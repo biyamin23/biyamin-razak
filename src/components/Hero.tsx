@@ -52,11 +52,11 @@ export function Hero() {
 
           <div className="mt-8 flex flex-wrap gap-4">
             <a href="#creations" className="btn bg-sun">
-              See my creations
+              Explore my creations
               <ArrowDown className="size-5" />
             </a>
-            <a href="#about" className="btn bg-paper">
-              About me
+            <a href="#services" className="btn bg-paper">
+              Work with me
             </a>
           </div>
         </div>
