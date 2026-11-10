@@ -18,9 +18,10 @@ const title = "Biyamin Razak | Teacher, AI creator, digital builder";
 const description =
   "MRSM teacher for Computer Science and Teknologi & Digital. AI web apps, AI videos (Apa Jadi Kalau), AI games and eBooks.";
 
-// og:image comes from app/opengraph-image.tsx. On Vercel, Next.js builds the
-// absolute image URL from the production domain automatically.
+// og:image comes from app/opengraph-image.tsx. metadataBase turns relative
+// share URLs (og:url, og:image, canonical) into full https://www.biyaminrazak.my links.
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.biyaminrazak.my"),
   title,
   description,
   openGraph: {
