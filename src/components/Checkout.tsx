@@ -69,6 +69,10 @@ export function Checkout() {
   async function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
+    if (!String(fd.get("telegram") ?? "").trim() && !String(fd.get("email") ?? "").trim()) {
+      setState({ kind: "error", msg: "Isi username Telegram atau email supaya saya boleh hantar eBook." });
+      return;
+    }
     const f = fd.get("receipt");
     if (f instanceof File && f.size > 0) fd.set("receipt", await shrink(f));
     setState({ kind: "sending" });
@@ -101,8 +105,7 @@ export function Checkout() {
         <p className="font-hand text-2xl">Terima kasih!</p>
         <h2 className="mt-1 text-2xl font-extrabold">Resit diterima · pesanan #{state.id}</h2>
         <p className="mt-2 leading-relaxed">
-          Saya akan semak bayaran anda dan hantar eBook <b>terus ke Telegram anda</b>. Pastikan anda boleh menerima mesej daripada
-          orang yang belum ada dalam contact.
+          Saya akan semak bayaran anda dan hantar eBook <b>ke Telegram atau email yang anda beri</b>. Kalau guna email, semak juga folder Spam.
         </p>
         <p className="mt-2 text-sm">Ada soalan? <a className="font-bold underline" href={site.telegram} target="_blank" rel="noopener noreferrer">DM saya di Telegram</a>.</p>
       </div>
@@ -137,11 +140,19 @@ export function Checkout() {
           <span className="font-bold">Nama</span>
           <input name="name" required minLength={2} maxLength={80} autoComplete="name" className="mt-1 w-full rounded-[10px] border-[2.5px] border-ink bg-paper px-3 py-2.5" />
         </label>
-        <label className="block">
-          <span className="font-bold">Username Telegram</span>
-          <input name="telegram" required pattern="@?[A-Za-z0-9_]{5,32}" placeholder="@namaanda" autoCapitalize="none" autoCorrect="off" className="mt-1 w-full rounded-[10px] border-[2.5px] border-ink bg-paper px-3 py-2.5" />
-          <span className="mt-1 block text-sm opacity-75">eBook akan dihantar ke sini. Semak di Telegram: Settings → My Profile → Username.</span>
-        </label>
+        <fieldset className="rounded-[12px] border-[2.5px] border-ink bg-paper/60 px-3 pt-1 pb-3">
+          <legend className="px-1 font-bold">Hantar eBook ke</legend>
+          <p className="text-sm opacity-75">Isi sekurang-kurangnya satu. Boleh isi kedua-duanya.</p>
+          <label className="mt-3 block">
+            <span className="font-semibold">Username Telegram</span>
+            <input name="telegram" pattern="@?[A-Za-z0-9_]{5,32}" placeholder="@namaanda" autoCapitalize="none" autoCorrect="off" className="mt-1 w-full rounded-[10px] border-[2.5px] border-ink bg-white px-3 py-2.5" />
+            <span className="mt-1 block text-xs opacity-75">Semak di Telegram: Settings → My Profile → Username.</span>
+          </label>
+          <label className="mt-3 block">
+            <span className="font-semibold">Email</span>
+            <input name="email" type="email" maxLength={120} placeholder="nama@email.com" autoComplete="email" autoCapitalize="none" className="mt-1 w-full rounded-[10px] border-[2.5px] border-ink bg-white px-3 py-2.5" />
+          </label>
+        </fieldset>
         <label className="block">
           <span className="font-bold">Resit pembayaran</span>
           <span className="mt-1 flex cursor-pointer items-center gap-3 rounded-[10px] border-[2.5px] border-dashed border-ink bg-paper px-3 py-3">
@@ -158,7 +169,7 @@ export function Checkout() {
         <button type="submit" disabled={sending} className="btn w-full justify-center bg-brand text-white disabled:opacity-60">
           {sending ? "Menghantar resit…" : "Hantar resit"}
         </button>
-        <p className="text-xs leading-relaxed opacity-75">Nama dan username Telegram anda hanya digunakan untuk menghantar eBook ini.</p>
+        <p className="text-xs leading-relaxed opacity-75">Nama, username Telegram dan email anda hanya digunakan untuk menghantar eBook ini.</p>
       </form>
     </div>
   );

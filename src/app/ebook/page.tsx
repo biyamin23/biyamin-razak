@@ -6,10 +6,17 @@ import { EbookCta } from "@/components/EbookCta";
 import { Logo } from "@/components/doodles";
 import { site } from "@/content/site";
 
+const title = "Buat Video dengan AI | eBook Biyamin Razak";
+const description =
+  "Cara saya hasilkan video animasi 3D 1.5 juta tontonan di TikTok dengan AI, tanpa studio dan tanpa kod. eBook Bahasa Melayu, 53 halaman. Harga promo RM19 untuk 100 pembeli pertama.";
+
+// og:image comes from app/ebook/opengraph-image.tsx (this page only).
 export const metadata: Metadata = {
-  title: "Buat Video dengan AI | eBook Biyamin Razak",
-  description:
-    "Cara penuh menghasilkan video animasi 3D menegak untuk TikTok & YouTube Shorts dengan AI, seperti siri Apa Jadi Kalau (1.5 juta tontonan). eBook Bahasa Melayu, 53 halaman.",
+  title,
+  description,
+  alternates: { canonical: "/ebook" },
+  openGraph: { type: "website", siteName: "Biyamin Razak", locale: "ms_MY", url: "/ebook", title, description },
+  twitter: { card: "summary_large_image", title, description },
 };
 
 // Real numbers from the @biyaminrazak TikTok profile screenshot (30 latest videos, Nov 2026).
@@ -61,7 +68,7 @@ const FAQ = [
   ["Perlu tahu coding?", "Tidak. Anda beri arahan dalam Bahasa Melayu kepada Claude Code. Kotak ⚡ Pro dalam buku boleh dilangkau untuk video pertama."],
   ["Laptop macam mana yang cukup?", "Laptop pertengahan sudah memadai. Video dalam buku ini dirender di laptop RTX 3050 4 GB dengan RAM sekitar 8 GB."],
   ["Ada kos lain selain eBook?", "Ya. Claude Code perlukan langganan berbayar (kira-kira USD 20 sebulan), dan ElevenLabs Starter (kira-kira USD 5 sebulan) untuk lesen komersial. ChatGPT dan Gemini boleh guna versi percuma. Harga boleh berubah."],
-  ["Bagaimana saya terima eBook?", "Selepas anda hantar resit, saya semak bayaran dan hantar PDF terus ke Telegram anda."],
+  ["Bagaimana saya terima eBook?", "Selepas anda hantar resit, saya semak bayaran dan hantar PDF ke Telegram atau email anda, ikut pilihan anda dalam borang."],
   ["Boleh bayar guna app bank?", "Boleh. QR DuitNow ini boleh di-scan dengan Touch 'n Go atau mana-mana app bank dan eWallet."],
   ["Boleh baca di telefon?", "Boleh. eBook dalam format PDF, dan boleh dibuka di telefon, tablet atau komputer."],
 ];
@@ -231,7 +238,7 @@ export default function EbookPage() {
               <h2 id="beli-title" className={`${H2} mt-5`}>Buat Video dengan AI</h2>
               <PromoSummary />
               <p className="mt-4 leading-relaxed">
-                Bayar dengan QR, upload resit, dan PDF dihantar ke Telegram anda selepas bayaran disahkan.
+                Bayar dengan QR, upload resit, dan PDF dihantar ke Telegram atau email anda selepas bayaran disahkan.
               </p>
               <p className="mt-3 text-sm">
                 Ada soalan sebelum beli? <a href={site.telegram} target="_blank" rel="noopener noreferrer" className="font-bold underline">DM saya di Telegram</a>.

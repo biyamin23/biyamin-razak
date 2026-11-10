@@ -25,7 +25,7 @@ export async function POST(request: Request) {
   }
 
   const [action, id] = (cb.data ?? "").split(":");
-  const order = await r.hgetall<{ status: string; handle: string; price: string }>(orderKey(id ?? ""));
+  const order = await r.hgetall<{ status: string; handle?: string; sendTo?: string; price: string }>(orderKey(id ?? ""));
   if (!order || !id) {
     await answer("Pesanan tidak dijumpai.");
     return new Response("ok");
@@ -43,7 +43,7 @@ export async function POST(request: Request) {
     const n = await r.incr(KEY_PAID);
     const left = Math.max(0, EBOOK.promoLimit - n);
     note = `✅ Disahkan · pembeli ke-${n}` + (left > 0 ? ` (baki promo: ${left})` : " (promo tamat, harga kini RM" + EBOOK.fullPrice + ")") +
-      `\n➡️ Hantar PDF kepada ${order.handle}`;
+      `\n➡️ Hantar PDF kepada ${order.sendTo || order.handle}`;
     await answer(`Disahkan. Pembeli ke-${n}.`);
   } else {
     await r.hset(orderKey(id), { status: "rejected", decidedAt: new Date().toISOString() });
