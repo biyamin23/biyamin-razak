@@ -37,8 +37,8 @@ export default function BeliPage() {
         <Link href="/#creations" className="font-semibold underline underline-offset-4">Kembali</Link>
       </header>
 
-      <main className="mx-auto grid max-w-5xl gap-10 px-4 pt-4 pb-16 sm:px-6 md:grid-cols-[1fr_1.05fr]">
-        <section aria-labelledby="ebook-title">
+      <main className="mx-auto grid max-w-5xl grid-cols-1 gap-10 px-4 pt-4 pb-16 sm:px-6 md:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)]">
+        <section aria-labelledby="ebook-title" className="min-w-0">
           <span className="sticker -rotate-2 bg-peach text-2xl">eBook · Bahasa Melayu</span>
           <h1 id="ebook-title" className="display mt-5 text-[clamp(2.4rem,7vw,3.6rem)] leading-[0.98] font-extrabold tracking-tight">
             Buat Video dengan AI
@@ -76,7 +76,7 @@ export default function BeliPage() {
           </ul>
         </section>
 
-        <section aria-label="Cara membeli">
+        <section aria-label="Cara membeli" className="min-w-0">
           <Checkout />
         </section>
       </main>
