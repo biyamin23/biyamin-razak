@@ -18,6 +18,14 @@ const inside = [
   "Prompt sedia salin, senarai semak & poster ringkas",
 ];
 
+// First 4 pages of the PDF, rendered as images (the PDF itself is never public).
+const previews = [
+  { src: "/beli/preview-1.webp", label: "Kulit buku" },
+  { src: "/beli/preview-2.webp", label: "Isi kandungan" },
+  { src: "/beli/preview-3.webp", label: "Isi kandungan (samb.)" },
+  { src: "/beli/preview-4.webp", label: "Selamat datang" },
+];
+
 export default function BeliPage() {
   return (
     <>
@@ -40,15 +48,27 @@ export default function BeliPage() {
             <b> Apa Jadi Kalau</b>. Tanpa studio, tanpa menulis kod.
           </p>
           <PromoSummary />
-          <Image
-            src="/beli/cover.jpg"
-            alt="Kulit eBook Buat Video dengan AI"
-            width={642}
-            height={909}
-            priority
-            className="mt-6 w-full max-w-[300px] -rotate-2 rounded-[14px] border-[3px] border-ink shadow-hard"
-          />
-          <h2 className="mt-8 text-xl font-extrabold">Isi buku (53 halaman)</h2>
+          <h2 className="mt-8 text-xl font-extrabold">Lihat 4 halaman pertama</h2>
+          <p className="mt-1 text-sm opacity-75">Leret ke tepi. Tekan halaman untuk lihat lebih besar.</p>
+          <ol className="-mx-4 mt-3 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pt-1 pb-4 sm:mx-0 sm:px-1">
+            {previews.map((p, i) => (
+              <li key={p.src} className="w-[62%] max-w-[260px] shrink-0 snap-start">
+                <a href={p.src} target="_blank" rel="noopener noreferrer" className="block">
+                  <Image
+                    src={p.src}
+                    alt={`Halaman ${i + 1}: ${p.label}`}
+                    width={759}
+                    height={1075}
+                    priority={i === 0}
+                    sizes="260px"
+                    className="w-full rounded-[10px] border-[3px] border-ink bg-white shadow-hard-sm"
+                  />
+                </a>
+                <p className="mt-2 text-sm font-semibold">Hal. {i + 1} · {p.label}</p>
+              </li>
+            ))}
+          </ol>
+          <h2 className="mt-6 text-xl font-extrabold">Isi buku (53 halaman)</h2>
           <ul className="mt-2 space-y-1.5">
             {inside.map((t) => (
               <li key={t} className="flex gap-2"><span aria-hidden="true">✔</span>{t}</li>
