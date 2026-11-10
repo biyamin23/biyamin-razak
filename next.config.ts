@@ -32,6 +32,10 @@ const nextConfig: NextConfig = {
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
   },
+  // The old checkout page now lives at the bottom of the /ebook sale page.
+  async redirects() {
+    return [{ source: "/beli", destination: "/ebook#beli", permanent: false }];
+  },
   cacheComponents: true,
   partialPrefetching: true,
   turbopack: {

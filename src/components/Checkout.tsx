@@ -145,7 +145,7 @@ export function Checkout() {
         <label className="block">
           <span className="font-bold">Resit pembayaran</span>
           <span className="mt-1 flex cursor-pointer items-center gap-3 rounded-[10px] border-[2.5px] border-dashed border-ink bg-paper px-3 py-3">
-            <span className="btn bg-sun px-4 py-1.5 text-sm">Pilih fail</span>
+            <span className="btn shrink-0 whitespace-nowrap bg-sun px-4 py-1.5 text-sm">Pilih fail</span>
             <span className="truncate text-sm">{fileName || "Gambar atau PDF, maksimum 4 MB"}</span>
             <input name="receipt" type="file" required accept="image/*,application/pdf" className="sr-only" onChange={(e) => setFileName(e.target.files?.[0]?.name ?? "")} />
           </span>

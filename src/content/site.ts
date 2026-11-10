@@ -112,7 +112,7 @@ export const site = {
       blurb: "Knowledge at your fingertips.",
       items: [
         // Add `href` + `buy: true` to each one when it goes on sale.
-        { title: "Buat Video dengan AI", note: "Bahasa Melayu · 53 halaman", href: "/beli", buy: true },
+        { title: "Buat Video dengan AI", note: "Bahasa Melayu · 53 halaman", href: "/ebook", buy: true },
         { title: "Buat Web App dengan AI", note: "Bahasa Melayu" },
         { title: "Buat Game dengan AI", note: "Bahasa Melayu" },
       ],
