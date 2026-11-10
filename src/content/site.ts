@@ -5,6 +5,7 @@ export type Item = {
   title: string;
   note?: string;
   href?: string;
+  buy?: boolean; // show the live price + "Beli sekarang" button
   // Character sticker (transparent webp with white outline in /public/creations),
   // rendered from the game itself and shown standing on the item box's right edge.
   // `place` holds Tailwind position/size classes for that sticker.
@@ -110,8 +111,8 @@ export const site = {
       title: "eBooks",
       blurb: "Knowledge at your fingertips.",
       items: [
-        // Add `href` (purchase link) to each one when it goes on sale.
-        { title: "Buat Video dengan AI", note: "Bahasa Melayu" },
+        // Add `href` + `buy: true` to each one when it goes on sale.
+        { title: "Buat Video dengan AI", note: "Bahasa Melayu · 53 halaman", href: "/beli", buy: true },
         { title: "Buat Web App dengan AI", note: "Bahasa Melayu" },
         { title: "Buat Game dengan AI", note: "Bahasa Melayu" },
       ],

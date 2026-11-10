@@ -19,6 +19,10 @@ main{max-width:30rem;border:3px solid #000;border-radius:18px;box-shadow:5px 5px
 <p>This site is only available in Malaysia.</p></main></body></html>`;
 
 export function proxy(request: NextRequest) {
+  // Telegram's servers (outside Malaysia) deliver the Sahkan/Tolak taps here.
+  // That route checks Telegram's secret header itself.
+  if (request.nextUrl.pathname === "/api/telegram/webhook") return NextResponse.next();
+
   const country = request.headers.get("x-vercel-ip-country");
   if (!country || country === ALLOWED_COUNTRY) return NextResponse.next();
   if (PREVIEW_BOTS.test(request.headers.get("user-agent") ?? "")) return NextResponse.next();

@@ -1,4 +1,6 @@
 import Image from "next/image";
+import Link from "next/link";
+import { BuyChip } from "@/components/BuyChip";
 import { Nav } from "@/components/Nav";
 import { Hero } from "@/components/Hero";
 import { TelegramButton } from "@/components/TelegramButton";
@@ -39,7 +41,11 @@ function CreationCard({ c }: { c: Creation }) {
                   className={`game-sticker pointer-events-none absolute z-10 w-auto drop-shadow-[2px_4px_3px_rgba(0,0,0,0.3)] ${i > 0 ? "is-second" : ""} ${it.character.place}`}
                 />
               )}
-              {it.href ? (
+              {it.href?.startsWith("/") ? (
+                <Link href={it.href} className="block font-bold underline decoration-2 underline-offset-4 hover:decoration-brand">
+                  {it.title}
+                </Link>
+              ) : it.href ? (
                 <a href={it.href} target="_blank" rel="noopener noreferrer" className="block font-bold underline decoration-2 underline-offset-4 hover:decoration-brand">
                   {it.title}
                 </a>
@@ -50,6 +56,7 @@ function CreationCard({ c }: { c: Creation }) {
                 {it.note}
                 {!it.href && <span className="font-hand text-base"> {site.pendingLabel}</span>}
               </span>
+              {it.buy && it.href && <BuyChip href={it.href} />}
             </li>
           ))}
         </ul>
