@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import { Bricolage_Grotesque, Caveat_Brush } from "next/font/google";
 import "./globals.css";
 
@@ -37,7 +38,11 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${bricolage.variable} ${caveat.variable} antialiased`}>
-      <body className="min-h-dvh">{children}</body>
+      <body className="min-h-dvh">
+        {children}
+        {/* Vercel Web Analytics: cookieless visitor and page-view counts. */}
+        <Analytics />
+      </body>
     </html>
   );
 }
