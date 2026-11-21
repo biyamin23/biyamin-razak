@@ -226,32 +226,34 @@ td.n{font-family:var(--f-mono);font-variant-numeric:tabular-nums;text-align:righ
   <section id="viewGuru" hidden>
     <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;margin-bottom:12px">
       <div>
-        <p class="eyebrow">Papan pemuka guru · 4 Trustworthy · 21 murid · 8 minggu</p>
-        <h2>Bukti keberkesanan intervensi</h2>
+        <p class="eyebrow">Papan pemuka guru · 4 Trustworthy · Matematik Tambahan</p>
+        <h2>Garis dasar sebelum intervensi</h2>
       </div>
+      <span class="demo-tag">Markah sebenar · murid dikodkan</span>
     </div>
     <div class="kpis" id="kpis"></div>
     <div class="grid2">
       <div class="panel">
-        <h3>Ujian Pra vs Ujian Pos (setiap murid)</h3>
-        <div class="legend"><span><i style="background:var(--pra)"></i>Pra</span><span><i style="background:var(--pos)"></i>Pos</span><span><i style="background:var(--pen);height:2px"></i>Lulus (40)</span></div>
+        <h3>Ujian Selaras 1: Semester 1 vs Semester 2</h3>
+        <div class="legend"><span><i style="background:var(--pra)"></i>Semester 1</span><span><i style="background:var(--pen)"></i>Semester 2</span><span><i style="background:var(--ink);height:2px"></i>Lulus (40)</span></div>
         <div class="chartbox" id="chPraPos"></div>
       </div>
       <div class="panel">
-        <h3>Min skor latihan mingguan</h3>
-        <div class="chartbox" id="chWeek"></div>
+        <h3>Sasaran selepas 8 minggu BEAMS</h3>
+        <div class="tbl"><table id="tTarget"></table></div>
+        <p style="font-size:13px;color:var(--muted);margin:10px 0 0">Garis dasar = Ujian Selaras 1 Semester 2. Ujian pos setara akan ditadbir pada Minggu 8.</p>
       </div>
     </div>
     <div class="grid2">
       <div class="panel">
-        <h3>Matriks kesilapan dalam skrip jawapan</h3>
+        <h3>Matriks kesilapan dalam skrip</h3>
         <div class="tbl"><table id="tErr"></table></div>
+        <p style="font-size:13px;color:var(--muted);margin:10px 0 0">Diisi daripada analisis skrip Minggu 1 dan Minggu 8, serta rekod automatik Jam Randik 15 Minit.</p>
       </div>
       <div class="panel">
-        <h3>Soal selidik persepsi murid (skala 1–5)</h3>
-        <div class="legend"><span><i style="background:var(--pra)"></i>Pra</span><span><i style="background:var(--pos)"></i>Pasca</span></div>
-        <div class="chartbox" id="chSurvey"></div>
-        <p style="font-size:13px;color:var(--muted);margin:8px 0 0">Bahagian B (kecemasan) — nilai lebih rendah bermaksud murid kurang cemas.</p>
+        <h3>Soal selidik persepsi murid</h3>
+        <div class="tbl"><table id="tSurvey"></table></div>
+        <p style="font-size:13px;color:var(--muted);margin:10px 0 0">15 item, skala Likert 1–5.</p>
       </div>
     </div>
     <div class="panel journal">
@@ -260,7 +262,7 @@ td.n{font-family:var(--f-mono);font-variant-numeric:tabular-nums;text-align:righ
       <div class="mcniff" id="mcniff"></div>
       <div id="jlist"></div>
       <label for="jtext" class="eyebrow" style="display:block;margin-top:14px">Catatan baharu (disimpan dalam pelayar ini)</label>
-      <textarea id="jtext" placeholder="Contoh: Minggu 5 — murid mula menulis penggantian nilai tanpa diingatkan..."></textarea>
+      <textarea id="jtext" placeholder="Contoh: Minggu 1 — analisis skrip menunjukkan..."></textarea>
       <div style="margin-top:8px"><button class="btn" id="jsave">Simpan catatan</button> <span id="jmsg" style="font-size:13px;color:var(--good)"></span></div>
     </div>
   </section>
@@ -268,7 +270,7 @@ td.n{font-family:var(--f-mono);font-variant-numeric:tabular-nums;text-align:righ
 </div>
 
 <script>
-const DATA = {"murid": [{"id": "M01", "kumpulan": "Cemerlang", "pra": 83, "pos": 90, "mingguan": [86, 82, 82, 85, 87, 85, 84, 85], "gred_pra": "A", "gred_pos": "A+", "langkah_kbat_pra": 3, "langkah_kbat_pos": 4}, {"id": "M02", "kumpulan": "Lemah", "pra": 10, "pos": 25, "mingguan": [11, 9, 11, 9, 12, 17, 22, 27], "gred_pra": "G", "gred_pos": "G", "langkah_kbat_pra": 0, "langkah_kbat_pos": 2}, {"id": "M03", "kumpulan": "Lemah", "pra": 13, "pos": 25, "mingguan": [16, 16, 14, 16, 19, 26, 27, 32], "gred_pra": "G", "gred_pos": "G", "langkah_kbat_pra": 1, "langkah_kbat_pos": 3}, {"id": "M04", "kumpulan": "Lemah", "pra": 13, "pos": 14, "mingguan": [12, 12, 11, 13, 13, 16, 19, 16], "gred_pra": "G", "gred_pos": "G", "langkah_kbat_pra": 1, "langkah_kbat_pos": 4}, {"id": "M05", "kumpulan": "Lemah", "pra": 25, "pos": 46, "mingguan": [27, 29, 30, 30, 34, 34, 35, 40], "gred_pra": "G", "gred_pos": "C", "langkah_kbat_pra": 0, "langkah_kbat_pos": 3}, {"id": "M06", "kumpulan": "Cemerlang", "pra": 80, "pos": 87, "mingguan": [81, 78, 74, 75, 76, 79, 83, 82], "gred_pra": "A", "gred_pos": "A", "langkah_kbat_pra": 3, "langkah_kbat_pos": 4}, {"id": "M07", "kumpulan": "Sederhana", "pra": 40, "pos": 53, "mingguan": [42, 43, 46, 52, 54, 57, 58, 57], "gred_pra": "C", "gred_pos": "C+", "langkah_kbat_pra": 1, "langkah_kbat_pos": 3}, {"id": "M08", "kumpulan": "Cemerlang", "pra": 80, "pos": 83, "mingguan": [79, 79, 82, 80, 78, 79, 86, 83], "gred_pra": "A", "gred_pos": "A", "langkah_kbat_pra": 3, "langkah_kbat_pos": 4}, {"id": "M09", "kumpulan": "Cemerlang", "pra": 95, "pos": 98, "mingguan": [94, 94, 92, 94, 91, 86, 87, 86], "gred_pra": "A+", "gred_pos": "A+", "langkah_kbat_pra": 3, "langkah_kbat_pos": 4}, {"id": "M10", "kumpulan": "Lemah", "pra": 23, "pos": 47, "mingguan": [26, 30, 31, 31, 31, 35, 32, 35], "gred_pra": "G", "gred_pos": "C", "langkah_kbat_pra": 1, "langkah_kbat_pos": 3}, {"id": "M11", "kumpulan": "Sederhana", "pra": 63, "pos": 77, "mingguan": [68, 65, 66, 69, 68, 73, 73, 72], "gred_pra": "B+", "gred_pos": "A-", "langkah_kbat_pra": 2, "langkah_kbat_pos": 3}, {"id": "M12", "kumpulan": "Cemerlang", "pra": 85, "pos": 94, "mingguan": [89, 93, 94, 93, 87, 90, 96, 96], "gred_pra": "A", "gred_pos": "A+", "langkah_kbat_pra": 3, "langkah_kbat_pos": 4}, {"id": "M13", "kumpulan": "Sederhana", "pra": 60, "pos": 73, "mingguan": [62, 63, 68, 73, 77, 76, 79, 81], "gred_pra": "B+", "gred_pos": "A-", "langkah_kbat_pra": 2, "langkah_kbat_pos": 3}, {"id": "M14", "kumpulan": "Cemerlang", "pra": 65, "pos": 70, "mingguan": [61, 58, 63, 66, 66, 70, 71, 66], "gred_pra": "B+", "gred_pos": "A-", "langkah_kbat_pra": 2, "langkah_kbat_pos": 3}, {"id": "M15", "kumpulan": "Lemah", "pra": 23, "pos": 41, "mingguan": [22, 26, 30, 28, 28, 33, 35, 37], "gred_pra": "G", "gred_pos": "C", "langkah_kbat_pra": 1, "langkah_kbat_pos": 4}, {"id": "M16", "kumpulan": "Sederhana", "pra": 63, "pos": 75, "mingguan": [65, 70, 76, 76, 77, 78, 77, 73], "gred_pra": "B+", "gred_pos": "A-", "langkah_kbat_pra": 2, "langkah_kbat_pos": 3}, {"id": "M17", "kumpulan": "Lemah", "pra": 28, "pos": 53, "mingguan": [26, 28, 33, 38, 38, 41, 45, 52], "gred_pra": "G", "gred_pos": "C+", "langkah_kbat_pra": 1, "langkah_kbat_pos": 4}, {"id": "M18", "kumpulan": "Sederhana", "pra": 55, "pos": 74, "mingguan": [60, 63, 62, 68, 74, 76, 78, 82], "gred_pra": "B", "gred_pos": "A-", "langkah_kbat_pra": 1, "langkah_kbat_pos": 4}, {"id": "M19", "kumpulan": "Sederhana", "pra": 63, "pos": 76, "mingguan": [66, 70, 71, 73, 73, 72, 74, 74], "gred_pra": "B+", "gred_pos": "A-", "langkah_kbat_pra": 2, "langkah_kbat_pos": 3}, {"id": "M20", "kumpulan": "Cemerlang", "pra": 98, "pos": 100, "mingguan": [98, 97, 96, 97, 98, 98, 94, 93], "gred_pra": "A+", "gred_pos": "A+", "langkah_kbat_pra": 3, "langkah_kbat_pos": 4}, {"id": "M21", "kumpulan": "Lemah", "pra": 35, "pos": 47, "mingguan": [38, 41, 46, 48, 49, 46, 47, 42], "gred_pra": "D", "gred_pos": "C", "langkah_kbat_pra": 0, "langkah_kbat_pos": 2}], "kesilapan": [["Kesilapan tanda (+/-)", 57, 18], ["Gagal memfaktorkan", 45, 14], ["Langkah kerja tidak lengkap", 68, 16], ["Tiada penggantian nilai", 50, 10], ["Kecuaian notasi / pecahan", 36, 13], ["Tidak sempat jawab (masa)", 31, 8]], "ringkasan": {"n": 21, "min_pra": 52.38, "min_pos": 64.19, "lulus_pra": 62, "lulus_pos": 86, "kbat3_pra": 29, "kbat3_pos": 90, "A_pra": 2.28, "A_pasca": 3.92, "B_pra": 3.78, "B_pasca": 2.37, "C_pasca": 4.34, "kesilapan_pra": 287, "kesilapan_pos": 79, "mingguan_min": [53.76, 54.57, 56.1, 57.81, 58.57, 60.33, 62, 62.43], "gred_pra": {"A+": 2, "A": 4, "A-": 0, "B+": 5, "B": 1, "C+": 0, "C": 1, "D": 1, "E": 0, "G": 7}, "gred_pos": {"A+": 4, "A": 2, "A-": 6, "B+": 0, "B": 0, "C+": 2, "C": 4, "D": 0, "E": 0, "G": 3}, "item_A_pra": [2.14, 2.29, 2, 2.62, 2.33], "item_A_pasca": [4.1, 4, 3.71, 3.62, 4.19], "item_B_pra": [3.81, 3.71, 3.95, 3.76, 3.67], "item_B_pasca": [2.57, 2.43, 2.48, 2.1, 2.29], "item_C_pasca": [4.24, 4.29, 4.62, 4.24, 4.33], "peningkatan_min_pct": 22.5, "penurunan_kesilapan_pct": 72.5}};
+const DATA = {"murid": [{"id": "M01", "s1": 83, "s2": 42}, {"id": "M02", "s1": 10, "s2": 4}, {"id": "M03", "s1": 13, "s2": 14}, {"id": "M04", "s1": 13, "s2": 8}, {"id": "M05", "s1": 25, "s2": 12}, {"id": "M06", "s1": 80, "s2": 18}, {"id": "M07", "s1": 40, "s2": 26}, {"id": "M08", "s1": 80, "s2": 85}, {"id": "M09", "s1": 95, "s2": 84}, {"id": "M10", "s1": 23, "s2": 44}, {"id": "M11", "s1": 63, "s2": 6}, {"id": "M12", "s1": 85, "s2": 26}, {"id": "M13", "s1": 60, "s2": 26}, {"id": "M14", "s1": 65, "s2": 12}, {"id": "M15", "s1": 23, "s2": 2}, {"id": "M16", "s1": 63, "s2": 40}, {"id": "M17", "s1": 28, "s2": 6}, {"id": "M18", "s1": 55, "s2": null}, {"id": "M19", "s1": 63, "s2": 28}, {"id": "M20", "s1": 98, "s2": 76}, {"id": "M21", "s1": 35, "s2": 2}]};
 
 /* ---------- mode & tabs ---------- */
 const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
@@ -402,69 +404,52 @@ function finishT(){
 $('#startT').onclick=startT;
 $('#fastT').onclick=()=>{ if(!tInt) startT(); tick(120); };
 
-/* ---------- Guru dashboard ---------- */
-const R=DATA.ringkasan;
+/* ---------- Guru dashboard (garis dasar sebenar) ---------- */
+const M=DATA.murid, both=M.filter(m=>m.s2!==null);
+const mean=a=>Math.round(a.reduce((x,y)=>x+y,0)/a.length*10)/10;
+const gredOf=v=>v>=90?'A+':v>=80?'A':v>=70?'A-':v>=60?'B+':v>=55?'B':v>=50?'C+':v>=40?'C':v>=35?'D':v>=30?'E':'G';
+const s1=both.map(m=>m.s1), s2=both.map(m=>m.s2);
+const R={n:both.length, min1:mean(s1), min2:mean(s2),
+  lulus1:s1.filter(v=>v>=40).length, lulus2:s2.filter(v=>v>=40).length,
+  g1:s1.filter(v=>gredOf(v)==='G').length, g2:s2.filter(v=>gredOf(v)==='G').length,
+  bp1:s1.filter(v=>v>=60).length, bp2:s2.filter(v=>v>=60).length,
+  turun:both.filter(m=>m.s2<m.s1).length};
 const kp=[
- ["Min markah ujian", R.min_pra, R.min_pos, `+${R.peningkatan_min_pct}%`],
- ["Kadar lulus (≥ 40)", R.lulus_pra+'%', R.lulus_pos+'%', `+${R.lulus_pos-R.lulus_pra} mata peratus`],
- ["Kuasai ≥ 3/4 langkah KBAT", R.kbat3_pra+'%', R.kbat3_pos+'%', `+${R.kbat3_pos-R.kbat3_pra} mata peratus`],
- ["Kesilapan dalam skrip", R.kesilapan_pra, R.kesilapan_pos, `−${R.penurunan_kesilapan_pct}%`],
+ ["Min markah", R.min1, R.min2, `${(R.min2-R.min1).toFixed(1)} markah`],
+ ["Murid lulus (≥ 40)", `${R.lulus1}/${R.n}`, `${R.lulus2}/${R.n}`, `${R.lulus2-R.lulus1} murid`],
+ ["Murid gred G", R.g1, R.g2, `+${R.g2-R.g1} murid`],
+ ["Murid merosot", "", `${R.turun}/${R.n}`, `markah Semester 2 lebih rendah`],
 ];
-$('#kpis').innerHTML=kp.map(k=>`<div class="kpi"><div class="k">${k[0]}</div><div class="v">${k[2]}</div><div class="d">${k[3]} <span>· pra ${k[1]}</span></div></div>`).join('');
+$('#kpis').innerHTML=kp.map(k=>`<div class="kpi"><div class="k">${k[0]}</div><div class="v">${k[2]}</div><div class="d" style="color:var(--pen)">${k[3]}${k[1]!==''?` <span>· Semester 1: ${k[1]}</span>`:''}</div></div>`).join('');
 
 function svgEl(w,h,inner){return `<svg viewBox="0 0 ${w} ${h}" width="100%" style="min-width:${Math.min(w,520)}px" role="img">${inner}</svg>`}
-// pra vs pos bars
 (function(){
-  const M=DATA.murid, W=560,H=230,L=30,B=26,T=10, iw=W-L-6, ih=H-B-T, bw=iw/M.length;
+  const W=560,H=230,L=30,B=26,T=10, iw=W-L-6, ih=H-B-T, bw=iw/M.length;
   const y=v=>T+ih-(v/100)*ih;
   let s='';
   [0,20,40,60,80,100].forEach(v=>{s+=`<line x1="${L}" x2="${W-6}" y1="${y(v)}" y2="${y(v)}" stroke="var(--grid)"/><text x="${L-6}" y="${y(v)+4}" text-anchor="end">${v}</text>`});
   M.forEach((m,i)=>{const x=L+i*bw+2, w=(bw-4)/2;
-    s+=`<rect x="${x}" y="${y(m.pra)}" width="${w}" height="${ih-(y(m.pra)-T)}" fill="var(--pra)" rx="1.5"><title>${m.id} pra ${m.pra}</title></rect>`;
-    s+=`<rect x="${x+w}" y="${y(m.pos)}" width="${w}" height="${ih-(y(m.pos)-T)}" fill="var(--pos)" rx="1.5"><title>${m.id} pos ${m.pos}</title></rect>`;
+    s+=`<rect x="${x}" y="${y(m.s1)}" width="${w}" height="${ih-(y(m.s1)-T)}" fill="var(--pra)" rx="1.5"><title>${m.id} Semester 1: ${m.s1}</title></rect>`;
+    if(m.s2!==null) s+=`<rect x="${x+w}" y="${y(m.s2)}" width="${w}" height="${Math.max(1,ih-(y(m.s2)-T))}" fill="var(--pen)" rx="1.5"><title>${m.id} Semester 2: ${m.s2}</title></rect>`;
     if(i%2===0) s+=`<text x="${x+w}" y="${H-8}" text-anchor="middle">${m.id}</text>`;
   });
-  s+=`<line x1="${L}" x2="${W-6}" y1="${y(40)}" y2="${y(40)}" stroke="var(--pen)" stroke-dasharray="4 3" stroke-width="1.5"/>`;
+  s+=`<line x1="${L}" x2="${W-6}" y1="${y(40)}" y2="${y(40)}" stroke="var(--ink)" stroke-dasharray="4 3" stroke-width="1.5"/>`;
   $('#chPraPos').innerHTML=svgEl(W,H,s);
 })();
-// weekly line
-(function(){
-  const d=R.mingguan_min, W=520,H=230,L=34,B=26,T=14,R0=16, iw=W-L-R0, ih=H-B-T;
-  const lo=40,hi=70, x=i=>L+i*(iw/(d.length-1)), y=v=>T+ih-((v-lo)/(hi-lo))*ih;
-  let s='';
-  [40,50,60,70].forEach(v=>{s+=`<line x1="${L}" x2="${W-R0}" y1="${y(v)}" y2="${y(v)}" stroke="var(--grid)"/><text x="${L-6}" y="${y(v)+4}" text-anchor="end">${v}</text>`});
-  const pts=d.map((v,i)=>`${x(i)},${y(v)}`).join(' ');
-  s+=`<polygon points="${x(0)},${y(lo)} ${pts} ${x(d.length-1)},${y(lo)}" fill="var(--accent-soft)"/>`;
-  s+=`<polyline points="${pts}" fill="none" stroke="var(--accent)" stroke-width="2.5"/>`;
-  d.forEach((v,i)=>{s+=`<circle cx="${x(i)}" cy="${y(v)}" r="${i===d.length-1?5:3}" fill="var(--accent)"/><text x="${x(i)}" y="${H-8}" text-anchor="middle">Mg ${i+1}</text>`});
-  s+=`<text class="lbl" x="${x(d.length-1)-8}" y="${y(d[d.length-1])-10}" text-anchor="end">${d[d.length-1]}</text><text class="lbl" x="${x(0)+8}" y="${y(d[0])-10}">${d[0]}</text>`;
-  $('#chWeek').innerHTML=svgEl(W,H,s);
-})();
-// error table
-(function(){
-  const mx=Math.max(...DATA.kesilapan.map(k=>k[1]));
-  $('#tErr').innerHTML=`<tr><th>Jenis kesilapan</th><th>Pra</th><th>Pos</th><th style="text-align:right">Turun</th></tr>`+
-   DATA.kesilapan.map(k=>`<tr><td>${k[0]}</td><td><div class="bar-cell"><i style="width:${k[1]/mx*70}px"></i><span class="math">${k[1]}</span></div></td><td><div class="bar-cell"><i class="after" style="width:${k[2]/mx*70}px"></i><span class="math">${k[2]}</span></div></td><td class="n">${Math.round((k[1]-k[2])/k[1]*100)}%</td></tr>`).join('');
-})();
-// survey
-(function(){
-  const rows=[["A. Keyakinan diri",R.A_pra,R.A_pasca],["B. Kecemasan matematik",R.B_pra,R.B_pasca],["C. Persepsi intervensi",null,R.C_pasca]];
-  const W=520,H=190,L=170,Rm=40, iw=W-L-Rm, x=v=>L+(v/5)*iw; let s='';
-  [1,2,3,4,5].forEach(v=>{s+=`<line x1="${x(v)}" x2="${x(v)}" y1="6" y2="${H-22}" stroke="var(--grid)"/><text x="${x(v)}" y="${H-6}" text-anchor="middle">${v}</text>`});
-  rows.forEach((r,i)=>{const y0=14+i*56;
-    s+=`<text class="lbl" x="0" y="${y0+18}">${r[0]}</text>`;
-    if(r[1]!==null){s+=`<rect x="${L}" y="${y0}" width="${x(r[1])-L}" height="14" fill="var(--pra)" rx="2"/><text x="${x(r[1])+5}" y="${y0+11}">${r[1].toFixed(2)}</text>`}
-    s+=`<rect x="${L}" y="${y0+18}" width="${x(r[2])-L}" height="14" fill="var(--pos)" rx="2"/><text class="lbl" x="${x(r[2])+5}" y="${y0+29}">${r[2].toFixed(2)}</text>`;
-  });
-  $('#chSurvey').innerHTML=svgEl(W,H,s);
-})();
-// journal
+$('#tTarget').innerHTML=`<tr><th>Petunjuk</th><th style="text-align:right">Garis dasar</th><th style="text-align:right">Sasaran</th></tr>`+
+ [["Min markah",R.min2,"≥ 40"],["Murid lulus (≥ 40)",`${R.lulus2}/${R.n}`,`≥ ${Math.ceil(R.n*0.6)}/${R.n}`],["Murid gred G",R.g2,`≤ ${Math.floor(R.g2/2)}`],["Kesilapan dalam skrip","Minggu 1","Turun 50%"],["Keyakinan diri (Likert)","Minggu 1","Naik ≥ 1 mata"]]
+ .map(r=>`<tr><td>${r[0]}</td><td class="n">${r[1]}</td><td class="n" style="color:var(--good);font-weight:600">${r[2]}</td></tr>`).join('');
+const ERR=["Langkah kerja tidak lengkap","Tiada penggantian nilai","Kesilapan tanda (+/-)","Gagal memfaktorkan","Kecuaian notasi / pecahan","Tidak sempat jawab (masa)"];
+$('#tErr').innerHTML=`<tr><th>Jenis kesilapan</th><th>Minggu 1</th><th>Minggu 8</th></tr>`+ERR.map(e=>`<tr><td>${e}</td><td><span class="chip">Belum diukur</span></td><td><span class="chip">Belum diukur</span></td></tr>`).join('');
+$('#tSurvey').innerHTML=`<tr><th>Bahagian</th><th>Item</th><th>Pra</th><th>Pasca</th></tr>`+
+ [["A. Keyakinan diri",5,"Minggu 1","Minggu 8"],["B. Kecemasan matematik",5,"Minggu 1","Minggu 8"],["C. Persepsi intervensi",5,"—","Minggu 8"]]
+ .map(r=>`<tr><td>${r[0]}</td><td class="n">${r[1]}</td><td><span class="chip">${r[2]}</span></td><td><span class="chip">${r[3]}</span></td></tr>`).join('');
 const PHASES=["Refleksi & Diagnosis","Perancangan Tindakan","Pelaksanaan & Pemerhatian","Penilaian & Bukti","Modifikasi & Gelung 2"];
-$('#mcniff').innerHTML=PHASES.map((p,i)=>`<span class="${i<=3?'on':''}">${i+1}. ${p}</span>`).join('');
+$('#mcniff').innerHTML=PHASES.map((p,i)=>`<span class="${i===0?'on':''}">${i+1}. ${p}</span>`).join('');
 const J0=[
- ["Minggu 1","Ujian Selaras 1: 8 daripada 21 murid gagal, 7 daripadanya gred G. Analisis skrip: kebanyakan markah hilang pada algebra asas dan langkah kerja, bukan pada konsep Kalkulus."],
- ["Minggu 4","Templat Jalan Kerja Murni mula berkesan. Murid menulis penggantian nilai tanpa diingatkan. Kesilapan tanda masih kerap pada kumpulan lemah."],
- ["Minggu 8","Ujian pos: 18/21 lulus. Murid sendiri meminta kaedah yang sama untuk topik Vektor. Gelung 2: tutor rakan sebaya untuk 3 murid yang masih gred G."],
+ ["Refleksi awal · Semester 1",`Ujian Selaras 1: ${R.lulus1} daripada ${R.n} murid lulus, ${R.g1} orang gred G. Min ${R.min1}.`],
+ ["Refleksi awal · Semester 2",`Min jatuh kepada ${R.min2}. Gred G bertambah kepada ${R.g2} orang dan ${R.turun} murid merosot, termasuk murid yang mendapat A pada Semester 1.`],
+ ["Rancangan","Minggu 1: analisis skrip Ujian Selaras 1 Semester 2 untuk menguji hipotesis bahawa markah hilang pada algebra asas dan langkah kerja."],
 ];
 function loadJ(){ let x=[]; try{ x=JSON.parse(localStorage.getItem('beams-j')||'[]') }catch(e){} return x }
 function renderJ(){ $('#jlist').innerHTML=[...J0,...loadJ()].map(j=>`<div class="jentry"><div class="w">${j[0]}</div>${j[1].replace(/</g,'&lt;')}</div>`).join('') }
