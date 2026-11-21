@@ -36,6 +36,13 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [{ source: "/beli", destination: "/ebook#beli", permanent: false }];
   },
+  // The BEAMS demo (Kajian Tindakan Matematik Tambahan) is a static page in
+  // public/kajiantindakanmt; serve it at the clean URL.
+  async rewrites() {
+    return [
+      { source: "/kajiantindakanmt", destination: "/kajiantindakanmt/index.html" },
+    ];
+  },
   cacheComponents: true,
   partialPrefetching: true,
   turbopack: {
